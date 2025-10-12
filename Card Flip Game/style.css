@@ -1,0 +1,177 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at center, #0c0f1a, #000);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.game-container {
+  text-align: center;
+  background: rgba(20, 20, 35, 0.8);
+  border: 4px solid #00eaff;
+  box-shadow: 0 0 10px #00eaff70, inset 0 0 10px #00eaff30;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 90%;
+}
+
+.game-title {
+  font-size: 3em;
+  color: #00eaff;
+  text-shadow: 0 0 15px #00eaff, 0 0 25px #0088ff;
+  margin-bottom: 20px;
+}
+
+.player-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+#moves, #time {
+  font-weight: bold;
+}
+
+#new-game {
+  background: transparent;
+  border: 2px solid #00eaff;
+  color: #00eaff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#new-game:hover {
+  background: #00eaff;
+  color: #000;
+  box-shadow: 0 0 15px #00eaff;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 150px);
+  grid-gap: 15px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.card {
+  width: 150px;
+  height: 150px;
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 0 15px #00eaff50;
+  border-radius: 15px;
+}
+
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.card-front {
+  background: linear-gradient(145deg, #0b586b, #189ec3);
+  border: 2px solid #001d1f;
+}
+
+.card-back {
+  background: linear-gradient(145deg, #777e7e, #51585f);
+  transform: rotateY(180deg);
+  color: #00111a;
+}
+
+@media (max-width: 1024px) {
+  .game-board {
+    grid-template-columns: repeat(4, 120px);
+    grid-gap: 12px;
+  }
+
+  .card {
+    width: 120px;
+    height: 120px;
+  }
+
+  .game-title {
+    font-size: 2.5em;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-board {
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+  }
+
+  .card {
+    width: 100px;
+    height: 100px;
+  }
+
+  .game-title {
+    font-size: 2em;
+  }
+
+  .player-info {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-board {
+    grid-template-columns: repeat(3, 80px);
+    grid-gap: 8px;
+  }
+
+  .card {
+    width: 80px;
+    height: 80px;
+  }
+
+  .game-title {
+    font-size: 1.5em;
+  }
+
+  #new-game {
+    padding: 8px 15px;
+  }
+
+  .card-front, .card-back {
+    font-size: 1.5rem;
+  }
+}
+
