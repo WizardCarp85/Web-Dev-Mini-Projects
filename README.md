@@ -44,7 +44,16 @@
   <li>Create a <b>new folder</b> with your project’s name inside <code>Web-Dev-Mini-Projects</code>.  
       Add your files (<code>index.html</code>, <code>style.css</code>, <code>script.js</code>, etc.).</li>
 
+  <li>Add a <code>meta.json</code> file with the following structure:</li>
+  <pre><code>{
+    "title": "Project Title",
+    "description": "Project Description",
+    "image": "path/to/image.png"
+  }</code></pre>
+
   <li>Include a <b>README.md</b> in your project folder with a short description & screenshots of your project.</li>
+
+  <li>In <code><a href="pages.json">pages.json</a></code>, add your project name to the list of projects. (Make sure it's unique and it matches the folder name)</li>
 
   <li>Create a <b>new branch</b>:<br>
     <pre><code>git checkout -b my-new-project</code></pre>
