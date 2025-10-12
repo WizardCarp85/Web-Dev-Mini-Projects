@@ -4,10 +4,13 @@ const PRODUCTS = [
   {id: 3, title: '4K Monitor', price: 299.99, img: 'https://picsum.photos/seed/monitor/400/300'},
   {id: 4, title: 'Wireless Earbuds', price: 79.99, img: 'https://picsum.photos/seed/earbuds/400/300'},
   {id: 5, title: 'USB-C Hub', price: 39.99, img: 'https://picsum.photos/seed/hub/400/300'},
-  {id: 6, title: 'Laptop Stand', price: 29.99, img: 'https://picsum.photos/seed/stand/400/300'}
+  {id: 6, title: 'Laptop Stand', price: 29.99, img: 'https://picsum.photos/seed/stand/400/300'},
+  {id: 7, title: 'Gaming Headset', price: 129.99, img: 'https://picsum.photos/seed/headset/400/300'},
+  {id: 8, title: 'Wireless Charger', price: 24.99, img: 'https://picsum.photos/seed/charger/400/300'},
+  {id: 9, title: 'Bluetooth Speaker', price: 59.99, img: 'https://picsum.photos/seed/speaker/400/300'}
 ];
 
-const productsEl = document.getElementById('products');
+const productsEl = document.getElementById('productsGrid');
 const tpl = document.getElementById('productTpl');
 const cartPanel = document.getElementById('cartPanel');
 const cartToggle = document.getElementById('cartToggle');
@@ -126,24 +129,38 @@ document.getElementById('checkout').addEventListener('click', () => {
 renderProducts();
 renderCart();
 
-renderProducts(); renderCart();
-const quotes = [
-  {q: "Simplicity is the soul of efficiency.", a: "— Austin Freeman"},
-  {q: "Stay curious. Keep learning.", a: "— Unknown"},
-  {q: "Code is like humor. When you have to explain it, it’s bad.", a: "— Cory House"},
-  {q: "Don’t fear failure. Fear being in the exact same place next year as you are today.", a: "— Michael Hyatt"},
-  {q: "Ship fast, iterate faster.", a: "— Open Source Mindset"}
-];
+// Navigation active state handling
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      // Remove active class from all nav links
+      navLinks.forEach(nav => nav.classList.remove('active'));
+      // Add active class to clicked link
+      this.classList.add('active');
+    });
+  });
+  
+  // Update active nav based on scroll position
+  window.addEventListener('scroll', function() {
+    const sections = ['home', 'productsSection', 'about', 'contact'];
+    const scrollPos = window.scrollY + 100;
+    
+    sections.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      const navLink = document.querySelector(`a[href="#${sectionId}"]`);
+      
+      if (section && navLink) {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          navLinks.forEach(nav => nav.classList.remove('active'));
+          navLink.classList.add('active');
+        }
+      }
+    });
+  });
+});
 
-const quoteEl = document.getElementById('quote');
-const authorEl = document.getElementById('author');
-const btn = document.getElementById('newQuote');
-
-function pick() {
-  const item = quotes[Math.floor(Math.random()*quotes.length)];
-  quoteEl.textContent = item.q;
-  authorEl.textContent = item.a;
-}
-
-btn.addEventListener('click', pick);
-window.addEventListener('load', pick);

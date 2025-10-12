@@ -3,22 +3,112 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tech Shop</title>
+    <title>EliteShop - Premium Tech & Electronics</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
     <header class="site-header">
       <div class="header-content">
-        <h1>Tech Shop</h1>
-        <button class="cart-btn" id="cartToggle">🛒 Cart (<span id="cartCount">0</span>)</button>
+        <div class="logo">
+          <span class="logo-text">Elite</span><span class="logo-accent">Shop</span>
+          <span class="logo-tagline">Premium Electronics</span>
+        </div>
+        <nav class="main-nav">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#productsSection" class="nav-link">Products</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <button class="cart-btn" id="cartToggle">
+          <span class="cart-icon">🛒</span>
+          Cart (<span id="cartCount">0</span>)
+        </button>
       </div>
     </header>
 
-    <main class="grid">
-      <section class="products" id="products"></section>
+    <!-- Modern Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            Discover Premium
+            <span class="hero-highlight">Technology</span>
+            That Inspires
+          </h1>
+          <p class="hero-description">
+            Elevate your digital lifestyle with our carefully curated collection of premium electronics, 
+            cutting-edge gadgets, and innovative tech solutions designed for the modern world.
+          </p>
+          <div class="hero-actions">
+            <button class="cta-primary" onclick="document.getElementById('productsSection').scrollIntoView({behavior: 'smooth'})">
+              Shop Now
+              <span class="cta-arrow">→</span>
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-number">10K+</span>
+              <span class="stat-label">Happy Customers</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">Premium Products</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">4.9★</span>
+              <span class="stat-label">Customer Rating</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-image-container">
+            <div class="floating-card card-1">
+              <div class="mini-product">
+                <div class="mini-img">📱</div>
+                <div class="mini-info">
+                  <div class="mini-title">iPhone 15 Pro</div>
+                  <div class="mini-price">$999</div>
+                </div>
+              </div>
+            </div>
+            <div class="floating-card card-2">
+              <div class="mini-product">
+                <div class="mini-img">💻</div>
+                <div class="mini-info">
+                  <div class="mini-title">MacBook Pro</div>
+                  <div class="mini-price">$1,999</div>
+                </div>
+              </div>
+            </div>
+            <div class="floating-card card-3">
+              <div class="mini-product">
+                <div class="mini-img">🎧</div>
+                <div class="mini-info">
+                  <div class="mini-title">AirPods Pro</div>
+                  <div class="mini-price">$249</div>
+                </div>
+              </div>
+            </div>
+            <div class="hero-gradient-bg"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="main-content">
+      <section class="products-section" id="productsSection">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Featured Products</h2>
+            <p class="section-description">Discover our handpicked selection of premium electronics</p>
+          </div>
+          <div class="products-grid" id="productsGrid"></div>
+        </div>
+      </section>
+    </main>
       <div class="overlay" id="overlay"></div>
       <aside class="cart-panel" id="cartPanel" aria-hidden="true">
         <h2>Your Cart</h2>
