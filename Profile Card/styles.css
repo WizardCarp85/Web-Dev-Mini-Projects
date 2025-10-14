@@ -1,0 +1,199 @@
+
+:root {
+    --primary-text: #110f0f;
+    --secondary-text: #110707;
+    --card-bg: #8f7a7a;
+    --body-bg: #e0b2b2;
+    --border-color: #eee;
+    --accent-color: #ff7b00; 
+    --hover-color: #b39200; 
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', sans-serif; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--body-bg);
+    color: var(--primary-text);
+    line-height: 1.6;
+    overflow-x: hidden; 
+}
+/* ---------------------------------- */
+/* PROFILE CARD */
+/* ---------------------------------- */
+.profile-card {
+    background-color: var(--card-bg);
+    border-radius: 12px; 
+    box-shadow: var(--shadow-light);
+    width: 320px; 
+    text-align: center;
+    overflow: hidden;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
+    margin: 20px;
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0; 
+}
+
+
+.profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+
+.card-header {
+    background-color: var(--card-bg); 
+    padding: 30px 20px 20px 20px;
+    position: relative;
+    border-bottom: 1px solid var(--border-color); 
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color); 
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 15px auto; 
+    transition: transform 0.3s ease-in-out; 
+}
+
+.avatar:hover {
+    transform: scale(1.05); 
+}
+
+h2 {
+    font-size: 1.8em;
+    margin: 0 0 5px 0;
+    color: var(--primary-text);
+}
+
+.title {
+    font-size: 1em;
+    color: var(--secondary-text);
+    margin: 0;
+    font-weight: 400; 
+}
+
+.card-body {
+    padding: 25px;
+    color: var(--secondary-text);
+    font-size: 0.95em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-footer {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ---------------------------------- */
+/* BUTTONS & LINKS */
+/* ---------------------------------- */
+.contact-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2); 
+}
+
+.contact-btn:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.contact-btn:active {
+    transform: translateY(0); 
+    box-shadow: 0 1px 4px rgba(0, 123, 255, 0.2);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
+    transition: color 0.3s ease, transform 0.2s ease; 
+    display: flex; 
+    align-items: center;
+    gap: 5px; 
+}
+
+.social-links a:hover {
+    color: var(--hover-color);
+    transform: translateY(-2px);
+    text-decoration: underline;
+}
+
+
+
+/* ---------------------------------- */
+/* KEYFRAME ANIMATIONS */
+/* ---------------------------------- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------------------------------- */
+/* RESPONSIVENESS (Media Queries) */
+/* ---------------------------------- */
+@media (max-width: 480px) { 
+    .profile-card {
+        width: 90%;
+        max-width: 300px; 
+        margin: 5vh auto; 
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+
+    .title {
+        font-size: 0.9em;
+    }
+
+    .card-body, .card-footer {
+        padding: 20px;
+    }
+
+    .contact-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    
+    .social-links {
+        gap: 15px;
+    }
+    
+    .social-links a {
+        font-size: 0.95em;
+    }
+}   
