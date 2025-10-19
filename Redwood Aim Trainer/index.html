@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Redwood Aim Trainer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hud">
+      <h1>Redwood Aim Trainer</h1>
+      <div class="stats">
+        <div>Time: <span id="time">30</span>s</div>
+        <div>Score: <span id="score">0</span></div>
+        <div>CPS: <span id="cps">0.00</span></div>
+        <div>TTK: <span id="ttk">0</span>ms</div>
+      </div>
+    </header>
+
+    <section id="arena" class="arena" aria-label="Игровая арена"></section>
+
+    <aside class="controls">
+      <label>Session length:
+        <select id="sessionLength">
+          <option value="15">15s</option>
+          <option value="30" selected>30s</option>
+          <option value="60">60s</option>
+        </select>
+      </label>
+
+      <label>Start size:
+        <input id="startSize" type="range" min="20" max="80" value="48">
+      </label>
+
+      <button id="startBtn">Start</button>
+      <button id="stopBtn" disabled>Stop</button>
+
+      <h3>Best sessions</h3>
+      <ul id="bestList" class="best-list"></ul>
+      <button id="clearBest">Clear best</button>
+
+      <p class="hint">Click targets. Difficulty adapts: hit streak -> smaller/faster targets. Metrics saved in localStorage.</p>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
