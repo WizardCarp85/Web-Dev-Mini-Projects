@@ -3,6 +3,7 @@ let currentLevel = 0;
 let moves = 0;
 let grid = [];
 let laserPath = [];
+const STORAGE_LAST_LEVEL = 'laserGrove_lastLevel';
 
 // Cell types
 const CELL_TYPES = {
@@ -70,22 +71,24 @@ const levels = [
         ],
         bestMoves: 4
     },
-    // Level 4 - Maze navigation
+    // Level 4 - Maze navigation (fixed to be solvable)
     {
         size: 6,
         source: { x: 0, y: 0, direction: 'DOWN' },
         target: { x: 5, y: 5 },
         obstacles: [
-            { x: 2, y: 2, type: CELL_TYPES.TREE },
+            // Keep obstacles off the intended path: (0,2)->(5,2)->(5,5)
+            { x: 2, y: 1, type: CELL_TYPES.TREE },
             { x: 3, y: 3, type: CELL_TYPES.ROCK }
         ],
         mirrors: [
+            // Path: DOWN to (0,2) [45° -> RIGHT] -> to (5,2) [45° -> DOWN] -> target at (5,5)
             { x: 0, y: 2, rotation: 0 },
-            { x: 2, y: 4, rotation: 0 },
-            { x: 4, y: 4, rotation: 0 },
-            { x: 4, y: 2, rotation: 0 }
+            { x: 5, y: 2, rotation: 0 },
+            // Extra decoy mirror
+            { x: 2, y: 4, rotation: 0 }
         ],
-        bestMoves: 4
+        bestMoves: 2
     },
     // Level 5 - Snake path
     {
@@ -96,6 +99,7 @@ const levels = [
             { x: 2, y: 2, type: CELL_TYPES.TREE },
             { x: 2, y: 4, type: CELL_TYPES.TREE },
             { x: 4, y: 2, type: CELL_TYPES.ROCK },
+            { x: 4, y: 3, type: CELL_TYPES.ROCK },
             { x: 4, y: 4, type: CELL_TYPES.ROCK }
         ],
         mirrors: [
@@ -108,7 +112,7 @@ const levels = [
         ],
         bestMoves: 6
     },
-    // Level 6 - Corner challenge
+    // Level 6 - Corner challenge (solvable with a single key turn)
     {
         size: 7,
         source: { x: 0, y: 0, direction: 'RIGHT' },
@@ -119,13 +123,15 @@ const levels = [
             { x: 5, y: 3, type: CELL_TYPES.ROCK }
         ],
         mirrors: [
+            // Key mirror to send beam DOWN the last column to target
+            { x: 6, y: 0, rotation: 0 },
+            // Decoys that don't block the optimal path
             { x: 3, y: 0, rotation: 0 },
-            { x: 6, y: 3, rotation: 0 },
             { x: 3, y: 6, rotation: 0 }
         ],
-        bestMoves: 3
+        bestMoves: 1
     },
-    // Level 7 - Forest maze
+    // Level 7 - Forest maze (adjusted to ensure a clear route)
     {
         size: 8,
         source: { x: 0, y: 0, direction: 'DOWN' },
@@ -137,57 +143,55 @@ const levels = [
             { x: 5, y: 5, type: CELL_TYPES.ROCK }
         ],
         mirrors: [
+            // Path: (0,3) 45° -> RIGHT ; (6,3) 45° -> DOWN ; (6,7) 135° -> RIGHT into target
             { x: 0, y: 3, rotation: 0 },
+            { x: 6, y: 3, rotation: 0 },
+            { x: 6, y: 7, rotation: 0 },
+            // Decoys
             { x: 3, y: 3, rotation: 0 },
             { x: 3, y: 0, rotation: 0 },
             { x: 6, y: 0, rotation: 0 },
-            { x: 6, y: 3, rotation: 0 },
             { x: 3, y: 6, rotation: 0 }
         ],
-        bestMoves: 6
+        bestMoves: 3
     },
-    // Level 8 - Double bounce
+    // Level 8 - Double bounce (reworked path around obstacles)
     {
         size: 8,
         source: { x: 0, y: 4, direction: 'RIGHT' },
         target: { x: 7, y: 4 },
         obstacles: [
-            { x: 2, y: 4, type: CELL_TYPES.ROCK },
-            { x: 5, y: 4, type: CELL_TYPES.ROCK },
             { x: 3, y: 2, type: CELL_TYPES.TREE },
             { x: 4, y: 6, type: CELL_TYPES.TREE }
         ],
         mirrors: [
+            // Path: (1,4) 45° -> DOWN ; (1,7) 45° -> RIGHT ; (7,7) 135° -> UP to target
             { x: 1, y: 4, rotation: 0 },
-            { x: 1, y: 1, rotation: 0 },
+            { x: 1, y: 7, rotation: 0 },
+            { x: 7, y: 7, rotation: 0 },
+            // Decoys
             { x: 4, y: 1, rotation: 0 },
-            { x: 4, y: 4, rotation: 0 },
-            { x: 6, y: 4, rotation: 0 },
-            { x: 6, y: 7, rotation: 0 }
+            { x: 6, y: 4, rotation: 0 }
         ],
-        bestMoves: 6
+        bestMoves: 3
     },
-    // Level 9 - Complex zigzag
+    // Level 9 - Complex zigzag (clean, solvable zig-zag)
     {
         size: 9,
         source: { x: 4, y: 0, direction: 'DOWN' },
         target: { x: 4, y: 8 },
         obstacles: [
-            { x: 4, y: 2, type: CELL_TYPES.ROCK },
-            { x: 4, y: 6, type: CELL_TYPES.ROCK },
-            { x: 2, y: 4, type: CELL_TYPES.TREE },
-            { x: 6, y: 4, type: CELL_TYPES.TREE }
+            { x: 2, y: 5, type: CELL_TYPES.TREE },
+            { x: 7, y: 2, type: CELL_TYPES.ROCK }
         ],
         mirrors: [
+            // Path: (4,1) 45° -> RIGHT ; (6,1) 45° -> DOWN ; (6,7) 135° -> LEFT ; (4,7) 135° -> DOWN
             { x: 4, y: 1, rotation: 0 },
-            { x: 2, y: 1, rotation: 0 },
-            { x: 2, y: 3, rotation: 0 },
-            { x: 4, y: 3, rotation: 0 },
-            { x: 6, y: 5, rotation: 0 },
+            { x: 6, y: 1, rotation: 0 },
             { x: 6, y: 7, rotation: 0 },
             { x: 4, y: 7, rotation: 0 }
         ],
-        bestMoves: 7
+        bestMoves: 4
     },
     // Level 10 - Master challenge
     {
@@ -218,9 +222,15 @@ const levels = [
 
 // Initialize game
 function init() {
+    // Restore last selected level if available
+    const savedLevel = parseInt(localStorage.getItem(STORAGE_LAST_LEVEL));
+    if (!Number.isNaN(savedLevel) && savedLevel >= 0) {
+        currentLevel = Math.min(savedLevel, levels.length - 1);
+    }
     loadLevel(currentLevel);
     setupEventListeners();
     loadBestScore();
+    setupLevelSelector();
 }
 
 // Setup event listeners
@@ -245,6 +255,29 @@ function setupEventListeners() {
     window.addEventListener('click', (e) => {
         if (e.target.classList.contains('modal')) {
             e.target.style.display = 'none';
+        }
+    });
+}
+
+// Populate and handle level selector
+function setupLevelSelector() {
+    const select = document.getElementById('levelSelect');
+    if (!select) return;
+    select.innerHTML = '';
+    for (let i = 0; i < levels.length; i++) {
+        const opt = document.createElement('option');
+        opt.value = i.toString();
+        opt.textContent = `Level ${i + 1}`;
+        if (i === currentLevel) opt.selected = true;
+        select.appendChild(opt);
+    }
+    select.addEventListener('change', (e) => {
+        const idx = parseInt(e.target.value);
+        if (!Number.isNaN(idx)) {
+            currentLevel = idx;
+            localStorage.setItem(STORAGE_LAST_LEVEL, currentLevel.toString());
+            loadLevel(currentLevel);
+            document.getElementById('nextBtn').disabled = true;
         }
     });
 }
@@ -299,6 +332,10 @@ function loadLevel(levelIndex) {
 
     // Update UI
     document.getElementById('level').textContent = levelIndex + 1;
+    const select = document.getElementById('levelSelect');
+    if (select && select.value !== String(levelIndex)) {
+        select.value = String(levelIndex);
+    }
     updateBestScore();
     renderGrid();
     calculateLaserPath();
@@ -529,6 +566,7 @@ function nextLevel() {
         currentLevel = 0;
     }
     loadLevel(currentLevel);
+    localStorage.setItem(STORAGE_LAST_LEVEL, currentLevel.toString());
     document.getElementById('nextBtn').disabled = true;
 }
 
