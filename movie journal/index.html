@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Movie Journal 🎬</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🎬 My Movie Journal</h1>
+    <p>Add, rate, and share what you loved about your favorite films!</p>
+  </header>
+
+  <section id="movie-form">
+    <input type="text" id="title" placeholder="Movie Title" />
+    <input type="text" id="director" placeholder="Director" />
+    <input type="number" id="year" placeholder="Year" min="1900" max="2099" />
+    <input type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" />
+    <textarea id="notes" placeholder="What did you love about it?"></textarea>
+    <label>
+      <input type="checkbox" id="allowComments" /> Allow comments
+    </label>
+    <button id="addMovie">Add Movie</button>
+  </section>
+
+  <section id="movie-list"></section>
+
+  <div id="commentModal" class="hidden">
+    <div class="modal-content">
+      <h3>💬 Comments</h3>
+      <ul id="commentList"></ul>
+      <input type="text" id="newComment" placeholder="Add a comment..." />
+      <button id="addComment">Post</button>
+      <button id="closeModal">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
