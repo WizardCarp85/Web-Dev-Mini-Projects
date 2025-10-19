@@ -175,12 +175,14 @@ const levels = [
         ],
         bestMoves: 3
     },
-    // Level 9 - Complex zigzag (clean, solvable zig-zag)
+    // Level 9 - Complex zigzag (clean, solvable zig-zag; prevent instant solve)
     {
         size: 9,
         source: { x: 4, y: 0, direction: 'DOWN' },
         target: { x: 4, y: 8 },
         obstacles: [
+            // Block straight-down path from source so rotations are required
+            { x: 4, y: 2, type: CELL_TYPES.ROCK },
             { x: 2, y: 5, type: CELL_TYPES.TREE },
             { x: 7, y: 2, type: CELL_TYPES.ROCK }
         ],
