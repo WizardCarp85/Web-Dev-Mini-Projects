@@ -5,7 +5,6 @@ const puzzles = [
     title: 'Starts and ends with a / e',
     positives: ['apple', 'apricot', 'alpine'],
     negatives: ['pineapple', 'maple', 'snapple'],
-    // a reasonable minimal answer for scoring (optional)
     minimal: '^a.*e$'
   },
   {
@@ -28,6 +27,55 @@ const puzzles = [
     positives: ['hello','world','abcxyz'],
     negatives: ['Hello','abc123',''],
     minimal: '^[a-z]+$'
+  },
+  {
+    id: 5,
+    title: 'Hex color (3 or 6 digits)',
+    positives: ['#fff', '#ffffff', '#123abc'],
+    negatives: ['fff', '#ggg', '#123abz'],
+    minimal: '^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$'
+  },
+  {
+    id: 6,
+    title: 'Simple email-like',
+    positives: ['a@b.com', 'john.doe@mail.org'],
+    negatives: ['a@b', '@nope', 'name@domain.'],
+    minimal: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$'
+  },
+  {
+    id: 7,
+    title: 'Ends with "ing"',
+    positives: ['running', 'sing', 'king'],
+    negatives: ['run', 'play', 'in g'],
+    minimal: 'ing$'
+  },
+  {
+    id: 8,
+    title: 'US phone (basic)',
+    positives: ['123-456-7890', '(123) 456-7890'],
+    negatives: ['12-3456-7890', 'phone', '1234567'],
+    minimal: '^\\(?\\d{3}\\)?[\\s-]?\\d{3}-\\d{4}$'
+  },
+  {
+    id: 9,
+    title: 'Double letters (any)',
+    positives: ['letter', 'cool', 'coffee'],
+    negatives: ['cat', 'dog', 'boter'],
+    minimal: '(.)\\1'
+  },
+  {
+    id: 10,
+    title: 'Date YYYY-MM-DD (basic)',
+    positives: ['2020-01-31', '1999-12-01'],
+    negatives: ['2020-13-01', '99-12-01', '20200101'],
+    minimal: '^\\d{4}-\\d{2}-\\d{2}$'
+  },
+  {
+    id: 11,
+    title: 'Starts with uppercase',
+    positives: ['Hello', 'World', 'Title'],
+    negatives: ['hello', ' world', '123Start'],
+    minimal: '^[A-Z]'
   }
 ]
 
