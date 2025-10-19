@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bitwise Lab — Головоломки на битовые операции</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Bitwise Lab</h1>
+    <p class="lead">Соберите целевое число, применяя побитовые операции к текущему числу.</p>
+
+    <section class="panel">
+      <div class="row">
+        <div class="card">
+          <h2>Текущее</h2>
+          <div id="current" class="big">0</div>
+        </div>
+        <div class="card">
+          <h2>Цель</h2>
+          <div id="target" class="big">0</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <label>Выберите операцию:</label>
+        <div class="ops">
+          <button data-op="AND">AND</button>
+          <button data-op="OR">OR</button>
+          <button data-op="XOR">XOR</button>
+          <button data-op="SHL">SHL &lt;&lt;</button>
+          <button data-op="SHR">SHR &gt;&gt;</button>
+        </div>
+
+        <label>Значение (0-255):</label>
+        <input id="operand" type="number" min="0" max="255" value="0" />
+
+        <div class="actions">
+          <button id="apply">Применить</button>
+          <button id="reset">Сбросить</button>
+          <button id="new">Новый уровень</button>
+        </div>
+      </div>
+
+      <div class="log">
+        <div class="meta">Операций: <span id="steps">0</span></div>
+        <ul id="history"></ul>
+      </div>
+
+      <div class="hint">
+        Подсказка: цель генерируется случайно. Попробуйте минимизировать число операций.
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
