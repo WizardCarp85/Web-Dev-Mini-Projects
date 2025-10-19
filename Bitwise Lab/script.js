@@ -77,8 +77,8 @@
 
   function checkWin(){
     if(state.current === state.target){
-      state.history.push(`✔ Победа за ${state.steps} операций`);
-      alert(`Победа! Вы собрали ${state.target} за ${state.steps} операций.`);
+      state.history.push(`✔ Victory in ${state.steps} steps`);
+      alert(`Victory! You assembled ${state.target} in ${state.steps} steps.`);
     }
   }
 
