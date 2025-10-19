@@ -88,7 +88,8 @@ function renderPuzzle(i){
   el('cases').innerHTML = ''
   const make = (s, cls) => {
     const li = document.createElement('li')
-    li.textContent = s
+    // add emoji marker for positive/negative
+    li.textContent = (cls === 'positive' ? '✅ ' : '❌ ') + s
     li.className = cls
     return li
   }
@@ -113,7 +114,7 @@ function evaluate(){
   const input = el('regex').value.trim()
   const {re,error} = safeCompile(input)
   if(error){
-    el('result').innerHTML = `<span style="color:var(--danger)">Error: ${error}</span>`
+    el('result').innerHTML = `<span style="color:var(--danger)">⚠️ Error: ${error}</span>`
     return
   }
 
@@ -137,22 +138,22 @@ function evaluate(){
       else stars = 1
     }
     el('stars').textContent = '★'.repeat(stars) + '☆'.repeat(3-stars)
-    el('result').innerHTML = `<span style="color:var(--success)">Success! ${posOk? 'all positives match.' : ''} ${negOk? 'no negatives matched.' : ''}</span>`
+  el('result').innerHTML = `<span style="color:var(--success)">🎉 Success! ${posOk? 'All positives match.' : ''} ${negOk? 'No negatives matched.' : ''}</span>`
     el('score-info').textContent = `Pattern length: ${userLen}${p.minimal? ' • reference: '+p.minimal : ''}`
   } else {
     let msg = ''
     if(!posOk) msg += 'Not all positive strings match. '
     if(!negOk) msg += 'Pattern matches forbidden strings.'
-    el('result').innerHTML = `<span style="color:var(--danger)">${msg}</span>`
+    el('result').innerHTML = `<span style="color:var(--danger)">❌ ${msg}</span>`
   }
 }
 
 function hint(){
   const p = puzzles[current]
   if(p.minimal){
-    el('result').innerHTML = `Hint: reference pattern: <code>${p.minimal}</code>`
+    el('result').innerHTML = `💡 Hint: reference pattern: <code>${p.minimal}</code>`
   } else {
-    el('result').textContent = 'Hint: try escaping special characters or using ^ / $ anchors.'
+    el('result').textContent = '💡 Hint: try escaping special characters or using ^ / $ anchors.'
   }
 }
 
