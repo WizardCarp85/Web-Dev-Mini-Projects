@@ -1,0 +1,357 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 700px;
+    width: 100%;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+h1 {
+    color: #2d5016;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    color: #5a7c3e;
+    font-size: 1.1em;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: linear-gradient(135deg, #4a7c3e 0%, #2d5016 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.info-item {
+    text-align: center;
+}
+
+.label {
+    display: block;
+    color: #c8e6c9;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.value {
+    display: block;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.level-select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    background: #e8f5e9;
+    color: #2d5016;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.game-board {
+    display: grid;
+    gap: 2px;
+    background: #2d5016;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cell {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #6b8e5a 0%, #5a7c3e 100%);
+    border: 1px solid #4a6c3e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    cursor: default;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.cell.clickable {
+    cursor: pointer;
+}
+
+.cell.clickable:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #7ba96a 0%, #6a8c4e 100%);
+}
+
+.cell.laser-path {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.laser-beam {
+    position: absolute;
+    background: linear-gradient(90deg, 
+        rgba(255, 0, 0, 0) 0%, 
+        rgba(255, 0, 0, 0.8) 50%, 
+        rgba(255, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.laser-beam.horizontal {
+    width: 100%;
+    height: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.laser-beam.vertical {
+    width: 4px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.laser-beam.diagonal-1 {
+    width: 141%;
+    height: 4px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.laser-beam.diagonal-2 {
+    width: 141%;
+    height: 4px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.cell-content {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4a7c3e 0%, #2d5016 100%);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    color: white;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+.modal-content h2 {
+    color: #2d5016;
+    margin-bottom: 20px;
+}
+
+.instructions {
+    text-align: left;
+}
+
+.instructions p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.instruction-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.instruction-item .icon {
+    font-size: 1.5em;
+    margin-right: 15px;
+    min-width: 30px;
+}
+
+.tip {
+    margin-top: 15px;
+    padding: 15px;
+    background: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    border-radius: 4px;
+}
+
+.win-content {
+    text-align: center;
+}
+
+.win-content h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.win-message {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    color: #555;
+}
+
+#finalMoves {
+    color: #4a7c3e;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .cell {
+        font-size: 1.5em;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
