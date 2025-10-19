@@ -23,7 +23,7 @@ A puzzle game where you guide a laser beam through a forest to reach the target 
 
 ## ✨ Features
 
-- 🎲 Multiple challenging levels with increasing difficulty
+- 🎲 **10 challenging levels** with progressively increasing difficulty
 - 📊 Move counter to track your efficiency
 - 🏆 Best score tracking for each level
 - 🎨 Beautiful forest-themed design
@@ -56,12 +56,19 @@ A puzzle game where you guide a laser beam through a forest to reach the target 
 
 ## 📋 Level Progression
 
-The game features multiple levels with:
-- Increasing grid sizes (5x5 to 8x8)
+The game features **10 levels** with:
+- **Level 1-2**: Tutorial levels (5x5 grid) - Learn the basics
+- **Level 3-4**: Intermediate challenges (6x6 grid) - More mirrors and obstacles
+- **Level 5-7**: Advanced puzzles (7-8x8 grid) - Complex paths
+- **Level 8-9**: Expert levels (8-9x9 grid) - Tricky zigzag patterns
+- **Level 10**: Master challenge (10x10 grid) - Ultimate test!
+
+Features include:
+- Increasing grid sizes (5x5 to 10x10)
 - More complex mirror arrangements
-- Additional obstacles (trees and rocks)
+- Strategic placement of obstacles (trees and rocks)
 - Different laser source positions and directions
-- Various target locations
+- Various target locations requiring careful planning
 
 ## 🎯 Challenge Yourself
 

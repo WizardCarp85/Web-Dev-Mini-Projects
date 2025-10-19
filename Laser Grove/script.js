@@ -25,6 +25,7 @@ const DIRECTIONS = {
 
 // Level definitions
 const levels = [
+    // Level 1 - Tutorial: Simple straight line with one mirror
     {
         size: 5,
         source: { x: 0, y: 2, direction: 'RIGHT' },
@@ -37,37 +38,56 @@ const levels = [
         ],
         bestMoves: 2
     },
+    // Level 2 - Simple diagonal: Learn basic reflection (solvable)
     {
-        size: 6,
+        size: 5,
         source: { x: 0, y: 0, direction: 'RIGHT' },
-        target: { x: 5, y: 5 },
+        target: { x: 4, y: 4 },
         obstacles: [
-            { x: 2, y: 2, type: CELL_TYPES.TREE },
-            { x: 3, y: 3, type: CELL_TYPES.TREE }
+            // Keep empty to avoid accidental blocks on the learning level
         ],
         mirrors: [
-            { x: 3, y: 0, rotation: 0 },
-            { x: 5, y: 2, rotation: 0 }
+            // Rotate both mirrors to 45° during play to route: RIGHT -> DOWN -> RIGHT
+            { x: 1, y: 0, rotation: 0 }, // set to 45° to go DOWN
+            { x: 1, y: 4, rotation: 0 }  // set to 45° to go RIGHT to target
         ],
-        bestMoves: 4
+        bestMoves: 2
     },
+    // Level 3 - Three mirrors: More complex path
     {
         size: 6,
         source: { x: 0, y: 3, direction: 'RIGHT' },
         target: { x: 5, y: 0 },
         obstacles: [
             { x: 2, y: 3, type: CELL_TYPES.ROCK },
-            { x: 3, y: 2, type: CELL_TYPES.TREE },
-            { x: 1, y: 1, type: CELL_TYPES.TREE }
+            { x: 3, y: 2, type: CELL_TYPES.TREE }
         ],
         mirrors: [
-            { x: 1, y: 3, rotation: 45 },
-            { x: 1, y: 2, rotation: 0 },
-            { x: 4, y: 2, rotation: 0 },
-            { x: 4, y: 1, rotation: 0 }
+            { x: 1, y: 3, rotation: 0 },
+            { x: 1, y: 1, rotation: 0 },
+            { x: 3, y: 1, rotation: 0 },
+            { x: 5, y: 1, rotation: 0 }
         ],
-        bestMoves: 5
+        bestMoves: 4
     },
+    // Level 4 - Maze navigation
+    {
+        size: 6,
+        source: { x: 0, y: 0, direction: 'DOWN' },
+        target: { x: 5, y: 5 },
+        obstacles: [
+            { x: 2, y: 2, type: CELL_TYPES.TREE },
+            { x: 3, y: 3, type: CELL_TYPES.ROCK }
+        ],
+        mirrors: [
+            { x: 0, y: 2, rotation: 0 },
+            { x: 2, y: 4, rotation: 0 },
+            { x: 4, y: 4, rotation: 0 },
+            { x: 4, y: 2, rotation: 0 }
+        ],
+        bestMoves: 4
+    },
+    // Level 5 - Snake path
     {
         size: 7,
         source: { x: 0, y: 3, direction: 'RIGHT' },
@@ -79,29 +99,118 @@ const levels = [
             { x: 4, y: 4, type: CELL_TYPES.ROCK }
         ],
         mirrors: [
-            { x: 2, y: 3, rotation: 0 },
+            { x: 1, y: 3, rotation: 0 },
+            { x: 1, y: 1, rotation: 0 },
             { x: 3, y: 1, rotation: 0 },
             { x: 3, y: 5, rotation: 0 },
+            { x: 5, y: 5, rotation: 0 },
             { x: 5, y: 3, rotation: 0 }
         ],
         bestMoves: 6
     },
+    // Level 6 - Corner challenge
+    {
+        size: 7,
+        source: { x: 0, y: 0, direction: 'RIGHT' },
+        target: { x: 6, y: 6 },
+        obstacles: [
+            { x: 3, y: 3, type: CELL_TYPES.TREE },
+            { x: 1, y: 3, type: CELL_TYPES.ROCK },
+            { x: 5, y: 3, type: CELL_TYPES.ROCK }
+        ],
+        mirrors: [
+            { x: 3, y: 0, rotation: 0 },
+            { x: 6, y: 3, rotation: 0 },
+            { x: 3, y: 6, rotation: 0 }
+        ],
+        bestMoves: 3
+    },
+    // Level 7 - Forest maze
     {
         size: 8,
         source: { x: 0, y: 0, direction: 'DOWN' },
         target: { x: 7, y: 7 },
         obstacles: [
-            { x: 3, y: 3, type: CELL_TYPES.TREE },
-            { x: 4, y: 4, type: CELL_TYPES.TREE },
-            { x: 2, y: 5, type: CELL_TYPES.ROCK },
-            { x: 5, y: 2, type: CELL_TYPES.ROCK }
+            { x: 2, y: 2, type: CELL_TYPES.TREE },
+            { x: 2, y: 5, type: CELL_TYPES.TREE },
+            { x: 5, y: 2, type: CELL_TYPES.TREE },
+            { x: 5, y: 5, type: CELL_TYPES.ROCK }
         ],
         mirrors: [
-            { x: 0, y: 4, rotation: 0 },
-            { x: 4, y: 0, rotation: 0 },
-            { x: 2, y: 2, rotation: 0 },
+            { x: 0, y: 3, rotation: 0 },
+            { x: 3, y: 3, rotation: 0 },
+            { x: 3, y: 0, rotation: 0 },
+            { x: 6, y: 0, rotation: 0 },
+            { x: 6, y: 3, rotation: 0 },
+            { x: 3, y: 6, rotation: 0 }
+        ],
+        bestMoves: 6
+    },
+    // Level 8 - Double bounce
+    {
+        size: 8,
+        source: { x: 0, y: 4, direction: 'RIGHT' },
+        target: { x: 7, y: 4 },
+        obstacles: [
+            { x: 2, y: 4, type: CELL_TYPES.ROCK },
+            { x: 5, y: 4, type: CELL_TYPES.ROCK },
+            { x: 3, y: 2, type: CELL_TYPES.TREE },
+            { x: 4, y: 6, type: CELL_TYPES.TREE }
+        ],
+        mirrors: [
+            { x: 1, y: 4, rotation: 0 },
+            { x: 1, y: 1, rotation: 0 },
+            { x: 4, y: 1, rotation: 0 },
+            { x: 4, y: 4, rotation: 0 },
+            { x: 6, y: 4, rotation: 0 },
+            { x: 6, y: 7, rotation: 0 }
+        ],
+        bestMoves: 6
+    },
+    // Level 9 - Complex zigzag
+    {
+        size: 9,
+        source: { x: 4, y: 0, direction: 'DOWN' },
+        target: { x: 4, y: 8 },
+        obstacles: [
+            { x: 4, y: 2, type: CELL_TYPES.ROCK },
+            { x: 4, y: 6, type: CELL_TYPES.ROCK },
+            { x: 2, y: 4, type: CELL_TYPES.TREE },
+            { x: 6, y: 4, type: CELL_TYPES.TREE }
+        ],
+        mirrors: [
+            { x: 4, y: 1, rotation: 0 },
+            { x: 2, y: 1, rotation: 0 },
+            { x: 2, y: 3, rotation: 0 },
+            { x: 4, y: 3, rotation: 0 },
+            { x: 6, y: 5, rotation: 0 },
+            { x: 6, y: 7, rotation: 0 },
+            { x: 4, y: 7, rotation: 0 }
+        ],
+        bestMoves: 7
+    },
+    // Level 10 - Master challenge
+    {
+        size: 10,
+        source: { x: 0, y: 5, direction: 'RIGHT' },
+        target: { x: 9, y: 5 },
+        obstacles: [
+            { x: 2, y: 5, type: CELL_TYPES.ROCK },
+            { x: 7, y: 5, type: CELL_TYPES.ROCK },
+            { x: 5, y: 2, type: CELL_TYPES.TREE },
+            { x: 5, y: 8, type: CELL_TYPES.TREE },
+            { x: 3, y: 3, type: CELL_TYPES.TREE },
+            { x: 6, y: 7, type: CELL_TYPES.TREE }
+        ],
+        mirrors: [
+            { x: 1, y: 5, rotation: 0 },
+            { x: 1, y: 2, rotation: 0 },
+            { x: 4, y: 2, rotation: 0 },
+            { x: 4, y: 5, rotation: 0 },
             { x: 5, y: 5, rotation: 0 },
-            { x: 7, y: 3, rotation: 0 }
+            { x: 8, y: 5, rotation: 0 },
+            { x: 8, y: 8, rotation: 0 },
+            { x: 5, y: 8, rotation: 0 }
         ],
         bestMoves: 8
     }
