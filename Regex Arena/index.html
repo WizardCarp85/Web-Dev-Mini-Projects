@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Regex Arena — Catch the Pattern</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+  <h1>🔍 Regex Arena</h1>
+  <p class="subtitle">🎯 Catch the pattern — enter a regular expression that matches the right-side positives and rejects the negatives.</p>
+
+    <section class="game">
+      <div class="left">
+        <label for="regex">Pattern (no delimiters):</label>
+        <input id="regex" placeholder="e.g.: ^a.*b$" spellcheck="false">
+        <div class="controls">
+          <button id="test">🧪 Test</button>
+          <button id="hint">💡 Hint</button>
+          <button id="next">➡️ Next</button>
+        </div>
+        <div id="result" aria-live="polite"></div>
+        <div class="score">
+          <span id="stars">☆☆☆</span>
+          <small id="score-info"></small>
+        </div>
+      </div>
+
+      <div class="right">
+        <h2>🧩 String cases</h2>
+        <ul id="cases" class="cases"></ul>
+        <details>
+          <summary>ℹ️ Info</summary>
+          <p>Goal: find the shortest pattern that matches all positive strings and rejects negative ones.</p>
+        </details>
+      </div>
+    </section>
+    <footer class="footer">✨ Local-only demo — submit puzzles via PR.</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
