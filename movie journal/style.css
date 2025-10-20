@@ -1,0 +1,121 @@
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #1e1e2f, #3b3b98);
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: 2rem;
+}
+
+#movie-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem;
+}
+
+#movie-form input, #movie-form textarea {
+  width: 80%;
+  max-width: 400px;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+#addMovie {
+  background: #ff9f1c;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+#addMovie:hover {
+  background: #ffbf69;
+}
+
+#movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.movie-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 1rem;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+}
+
+.movie-card h3 {
+  margin: 0.3rem 0;
+}
+
+.stars {
+  color: gold;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+button.comment-btn, button.delete-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+button.comment-btn:hover {
+  color: #1ecbe1;
+}
+
+button.delete-btn:hover {
+  color: #ff6b6b;
+}
+
+/* Comment Modal */
+#commentModal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex; align-items: center; justify-content: center;
+   opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.modal-content {
+  background: #222;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 300px;
+}
+#commentModal:not(.hidden) {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.hidden { display: none !important; }
