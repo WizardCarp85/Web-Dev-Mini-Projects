@@ -1,5 +1,5 @@
 {
   "title": "WordCanvas",
-  "description": "lets the user write a prompt and then generate an emoji wallpaper for it",
+  "description": "This application lets the user write a prompt and then generate an emoji wallpaper for it",
   "image": "Screenshot.png"
 }
