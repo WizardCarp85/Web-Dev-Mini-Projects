@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bitwise Lab — Bitwise operation puzzles</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Bitwise Lab</h1>
+    <p class="lead">Assemble the target number by applying bitwise operations to the current number.</p>
+
+    <section class="explain">
+      <h3>🔧 How it works</h3>
+      <p>
+        You are given a current number and a target number (both in the 0–255 range). Your goal is to turn the current number into the target using bitwise operations.
+        Available operations:
+      </p>
+      <ul>
+        <li>🔒 <strong>AND (a &amp; b)</strong> — bitwise AND: keeps 1 only where both bits are 1;</li>
+        <li>✨ <strong>OR (a | b)</strong> — bitwise OR: sets 1 when at least one bit is 1;</li>
+        <li>🔁 <strong>XOR (a ^ b)</strong> — bitwise XOR: sets 1 where bits differ;</li>
+        <li>⬅️ <strong>SHL (a &lt;&lt; n)</strong> — logical shift left by n bits (multiply by 2^n within the bit width);</li>
+        <li>➡️ <strong>SHR (a &gt;&gt;&gt; n)</strong> — logical shift right by n bits (integer division with truncation).</li>
+      </ul>
+
+      <h3>🧩 How to design puzzles</h3>
+      <p>
+        To craft a level, pick a starting (current) number and a target number. Good puzzles have a short minimal solution and require combining operations.
+        Examples:
+      </p>
+      <ul>
+        <li>🔢 Start from a small value, shift it left, then use OR/XOR to tweak individual bits.</li>
+        <li>🧼 Use AND to clear unwanted bits, then OR to set the needed ones.</li>
+        <li>↔️ Shifts are useful for quickly moving blocks of bits — note the game is limited to 8 bits (0–255).</li>
+      </ul>
+
+      <h3>💡 Solving tips</h3>
+      <ul>
+        <li>🔍 Compare binary representations of current and target: which bits must be set or cleared.</li>
+        <li>🎯 Use OR with a mask to set specific bits.</li>
+        <li>🧯 Use AND with an inverted mask to clear bits.</li>
+        <li>🔁 Use XOR when you need to toggle a set of bits (1→0 and 0→1) at once.</li>
+        <li>🔀 If the target is a shifted version of the current, try SHL/SHR first — it may reduce steps.</li>
+        <li>🛠️ Combine operations: sometimes an intermediate transformation (e.g. shift then XOR) leads to a shorter solution.</li>
+      </ul>
+      <p class="muted">💡 Tip: for 8-bit numbers you can compute the minimal number of operations programmatically (BFS over states 0..255). This could be added later as a hint/check.</p>
+    </section>
+
+    <section class="panel">
+      <div class="row">
+        <div class="card">
+          <h2>Current</h2>
+          <div id="current" class="big">0</div>
+        </div>
+        <div class="card">
+          <h2>Target</h2>
+          <div id="target" class="big">0</div>
+        </div>
+      </div>
+
+      <div class="controls">
+  <label>Choose operation:</label>
+        <div class="ops">
+          <button data-op="AND">AND</button>
+          <button data-op="OR">OR</button>
+          <button data-op="XOR">XOR</button>
+          <button data-op="SHL">SHL &lt;&lt;</button>
+          <button data-op="SHR">SHR &gt;&gt;</button>
+        </div>
+
+  <label>Value (0-255):</label>
+        <input id="operand" type="number" min="0" max="255" value="0" />
+
+        <div class="actions">
+          <button id="apply">Apply</button>
+          <button id="reset">Reset</button>
+          <button id="new">New level</button>
+        </div>
+      </div>
+
+      <div class="log">
+        <div class="meta">Operations: <span id="steps">0</span></div>
+        <ul id="history"></ul>
+      </div>
+
+      <div class="hint">
+        Hint: target is generated randomly. Try to minimize the number of operations.
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
