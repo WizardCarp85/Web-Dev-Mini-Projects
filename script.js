@@ -1,5 +1,3 @@
-// Copied and modified from https://github.com/nihaltp/wplace
-
 document.addEventListener('DOMContentLoaded', async () => {
     const projectsContainer = document.getElementById('projects-container');
 
