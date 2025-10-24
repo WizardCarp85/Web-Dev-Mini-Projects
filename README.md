@@ -87,7 +87,7 @@ git commit -m "Added my awesome mini project 🚀"</code></pre>
 
 <hr>
 
-<h2>🧑‍💻 Project Maintainer</h2>
+<h2>Maintainer👷‍♂️ :</h2>
 
 <table align="center">
 
