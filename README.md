@@ -87,8 +87,29 @@ git commit -m "Added my awesome mini project 🚀"</code></pre>
 
 <hr>
 
+<h2>🧑‍💻 Project Maintainer</h2>
+
+<table align="center">
+
+  <tr>
+    <td align="center" style="padding: 10px; border: 1px solid #ffffffff;">
+      <a href="https://github.com/roseewood" target="_blank">
+        <img src="https://github.com/roseewood.png?size=120" alt="Project-Maintainer" width="120" style="border-radius:50%;"/>
+      </a>
+      <br>
+        <b>roseewood</b>
+      </td>
+       
+  </tr>
+</table>
+
+
+<hr>
+
 <h2>🌍 Open Source Involvement</h2>
 <img src="Image/Hacktoberfest2025.jpg" alt="" width="">
+
+<br>
 <p>
   This project proudly participates in community-driven open-source initiatives.  
   It’s all about <b>learning, sharing, and growing together</b>. 💡
