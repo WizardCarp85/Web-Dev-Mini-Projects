@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Security Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="terminal-header">
+            <div class="terminal-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <span style="color: #00ff41; font-size: 0.8em; opacity: 0.6;">root@security:~#</span>
+        </div>
+
+        <h1>⚡ PASSWORD ANALYZER ⚡</h1>
+        <p class="subtitle">INITIALIZING SECURITY PROTOCOL...</p>
+
+        <div class="input-group">
+            <label class="input-label">ENTER PASSWORD FOR ANALYSIS</label>
+            <div class="input-wrapper">
+                <input type="password" id="passwordInput" placeholder="Type password here...">
+                <button class="toggle-password" onclick="togglePassword()">👁</button>
+            </div>
+            <div class="strength-meter">
+                <div class="strength-bar" id="strengthBar"></div>
+            </div>
+            <div class="strength-text" id="strengthText"></div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>[ Length ]</h3>
+                <p id="lengthStat">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>[ Charset ]</h3>
+                <p id="typesStat">0/4</p>
+            </div>
+            <div class="stat-card">
+                <h3>[ Entropy ]</h3>
+                <p id="entropyStat">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>[ Score ]</h3>
+                <p id="scoreStat">0/100</p>
+            </div>
+        </div>
+
+        <div class="requirements">
+            <h3>SECURITY CHECKS</h3>
+            <div class="requirement" id="req1">Minimum 8 characters</div>
+            <div class="requirement" id="req2">Uppercase letter detected</div>
+            <div class="requirement" id="req3">Lowercase letter detected</div>
+            <div class="requirement" id="req4">Numeric value detected</div>
+            <div class="requirement" id="req5">Special character detected</div>
+        </div>
+
+        <div class="crack-time" id="crackTime" style="display: none;">
+            <strong>TIME TO BREACH:</strong> <span id="crackTimeText"></span>
+        </div>
+
+        <div class="tips">
+            <h3>DEFENSE PROTOCOLS</h3>
+            <ul>
+                <li>Deploy minimum 12-character passwords</li>
+                <li>Implement mixed character encryption</li>
+                <li>Avoid predictable patterns and sequences</li>
+                <li>Never reuse authentication credentials</li>
+                <li>Enable two-factor authentication system</li>
+                <li>Utilize encrypted password vault</li>
+                <li>Rotate credentials every 90 days</li>
+                <li>Monitor for unauthorized access attempts</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
