@@ -1,0 +1,11 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center;    /* Vertically center */
+  height: 100vh;
+}
+canvas {
+  display: block;
+}
