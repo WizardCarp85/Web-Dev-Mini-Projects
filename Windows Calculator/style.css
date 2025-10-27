@@ -1,0 +1,343 @@
+:root {
+    --bg-app: #f3f3f3;
+    --bg-calculator: #ffffff;
+    --bg-display: #f9f9f9;
+    --bg-button: #f9f9f9;
+    --bg-button-hover: #e5e5e5;
+    --bg-button-active: #d6d6d6;
+    --bg-operator: #f3f3f3;
+    --bg-operator-hover: #e0e0e0;
+    --bg-equals: #0078d4;
+    --bg-equals-hover: #106ebe;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --text-display: #000000;
+    --border: #e0e0e0;
+    --accent: #0078d4;
+}
+
+[data-theme="dark"] {
+    --bg-app: #202020;
+    --bg-calculator: #1f1f1f;
+    --bg-display: #1f1f1f;
+    --bg-button: #2d2d2d;
+    --bg-button-hover: #3a3a3a;
+    --bg-button-active: #474747;
+    --bg-operator: #323232;
+    --bg-operator-hover: #3f3f3f;
+    --bg-equals: #0078d4;
+    --bg-equals-hover: #1a86da;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --text-display: #ffffff;
+    --border: #3a3a3a;
+    --accent: #0078d4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-app);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 0.2s ease;
+}
+
+.calculator {
+    background: var(--bg-calculator);
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: background 0.2s ease;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 16px 12px 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.header h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.theme-toggle {
+    background: transparent;
+    border: none;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--bg-button-hover);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    padding: 0 16px;
+    gap: 4px;
+    background: var(--bg-calculator);
+    border-bottom: 1px solid var(--border);
+}
+
+.tab {
+    background: transparent;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-button-hover);
+}
+
+.tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Display */
+.display {
+    padding: 16px;
+    text-align: right;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: var(--bg-calculator);
+}
+
+.display-top {
+    font-size: 14px;
+    color: var(--text-secondary);
+    min-height: 24px;
+    margin-bottom: 4px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.display-main {
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--text-display);
+    word-wrap: break-word;
+    line-height: 1.2;
+}
+
+/* Buttons */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    padding: 0;
+    background: var(--bg-calculator);
+}
+
+.btn {
+    background: var(--bg-button);
+    border: none;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: background 0.1s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    outline: none;
+}
+
+.btn:hover {
+    background: var(--bg-button-hover);
+}
+
+.btn:active {
+    background: var(--bg-button-active);
+}
+
+.btn.function {
+    background: var(--bg-operator);
+    font-size: 14px;
+}
+
+.btn.function:hover {
+    background: var(--bg-operator-hover);
+}
+
+.btn.operator {
+    background: var(--bg-operator);
+    font-size: 18px;
+}
+
+.btn.operator:hover {
+    background: var(--bg-operator-hover);
+}
+
+.btn.number {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.btn.equals {
+    background: var(--bg-equals);
+    color: white;
+    font-size: 18px;
+}
+
+.btn.equals:hover {
+    background: var(--bg-equals-hover);
+}
+
+.btn.equals:active {
+    background: #005a9e;
+}
+
+#negate, #decimal {
+    font-size: 18px;
+}
+
+/* Converter Styles */
+#convert {
+    padding: 20px;
+}
+
+.converter-type {
+    margin-bottom: 24px;
+}
+
+.converter-type label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.converter-type select,
+.input-group select,
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-display);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.2s ease;
+}
+
+.converter-type select:focus,
+.input-group select:focus,
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--bg-calculator);
+}
+
+.converter-input {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.swap-btn {
+    text-align: center;
+    margin: 8px 0;
+}
+
+.swap-btn button {
+    background: var(--bg-button);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.swap-btn button:hover {
+    background: var(--bg-button-hover);
+    transform: rotate(180deg);
+}
+
+.swap-btn button:active {
+    background: var(--bg-button-active);
+}
+
+@media (max-width: 500px) {
+    .calculator {
+        max-width: 100%;
+    }
+    
+    .display-main {
+        font-size: 40px;
+    }
+    
+    .btn {
+        padding: 16px;
+        font-size: 14px;
+    }
+    
+    .btn.number,
+    .btn.operator,
+    .btn.equals {
+        font-size: 16px;
+    }
+    
+    #convert {
+        padding: 16px;
+    }
+}
