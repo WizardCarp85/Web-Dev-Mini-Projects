@@ -1,0 +1,313 @@
+:root {
+    --bg-1: #0f1724;
+    --bg-2: #071021;
+    --card: rgba(255, 255, 255, 0.04);
+    --glass: rgba(255, 255, 255, 0.04);
+    --accent: #5eead4;
+    --accent-2: #60a5fa;
+    --muted: rgba(255, 255, 255, 0.6);
+}
+
+/* Background and app layout */
+* {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial;
+    background: radial-gradient(
+            800px 400px at 10% 10%,
+            rgba(96, 165, 250, 0.06),
+            transparent
+        ),
+        radial-gradient(
+            700px 350px at 90% 90%,
+            rgba(94, 234, 212, 0.04),
+            transparent
+        ),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    color: #e6eef8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    padding: 40px 20px;
+}
+
+/* Floating decorative blobs */
+.float {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 0;
+    animation: floaty 8s ease-in-out infinite alternate;
+}
+.float-1 {
+    width: 360px;
+    height: 360px;
+    background: linear-gradient(135deg, #60a5fa, #7c3aed);
+    top: -80px;
+    left: -120px;
+    transform: translateZ(0);
+}
+.float-2 {
+    width: 260px;
+    height: 260px;
+    background: linear-gradient(135deg, #5eead4, #34d399);
+    bottom: -100px;
+    right: -120px;
+    animation-duration: 12s;
+}
+.float-3 {
+    width: 160px;
+    height: 160px;
+    background: linear-gradient(135deg, #f472b6, #fb7185);
+    top: 10%;
+    right: 10%;
+    opacity: 0.18;
+    animation-duration: 9s;
+}
+@keyframes floaty {
+    to {
+        transform: translateY(30px) translateX(10px) rotate(6deg);
+    }
+}
+
+/* App container */
+.app {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Hero header with floating animation */
+.hero {
+    text-align: center;
+    margin-bottom: 18px;
+    backdrop-filter: blur(6px);
+}
+.floating {
+    font-size: 2.25rem;
+    letter-spacing: -0.02em;
+    margin: 6px 0 4px;
+    display: inline-block;
+    animation: float-header 3.5s ease-in-out infinite;
+    color: #eaf6ff;
+    text-shadow: 0 6px 30px rgba(7, 16, 33, 0.6);
+}
+.tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+@keyframes float-header {
+    0% {
+        transform: translateY(0) rotate(-1deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(1deg);
+    }
+    100% {
+        transform: translateY(0) rotate(-1deg);
+    }
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 18px;
+    z-index: 2;
+}
+input[type="text"] {
+    width: 260px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.01)
+    );
+    color: #eaf6ff;
+    outline: none;
+    transition: box-shadow 0.18s, transform 0.12s;
+}
+input[type="text"]::placeholder {
+    color: rgba(234, 246, 255, 0.5);
+}
+input[type="text"]:focus {
+    box-shadow: 0 6px 30px rgba(96, 165, 250, 0.06);
+    transform: translateY(-2px);
+}
+
+button {
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    color: #04263b;
+    font-weight: 600;
+    box-shadow: 0 8px 30px rgba(96, 165, 250, 0.12);
+    transition: transform 0.12s, box-shadow 0.12s;
+}
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 6px 18px rgba(96, 165, 250, 0.08);
+}
+
+/* Result area */
+#result {
+    width: 100%;
+    margin-top: 10px;
+    z-index: 2;
+}
+#result h2 {
+    font-size: 1rem;
+    color: rgba(234, 246, 255, 0.9);
+    margin: 6px 0 10px;
+}
+
+/* Loader */
+#loader {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+.spinner {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.08);
+    border-top-color: var(--accent);
+    animation: spin 0.9s linear infinite;
+    box-shadow: 0 6px 18px rgba(96, 165, 250, 0.08),
+        inset 0 0 12px rgba(94, 234, 212, 0.02);
+}
+.loader-text {
+    color: rgba(234, 246, 255, 0.8);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Evolution chain container */
+#EvolutionChain {
+    margin-top: 8px;
+    padding: 8px;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.01)
+    );
+    border-radius: 14px;
+    box-shadow: 0 6px 40px rgba(8, 12, 20, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Pokemon card */
+.pokeDiv {
+    /* much larger card to fit bigger sprite */
+    width: 240px;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.01)
+    );
+    border-radius: 14px;
+    padding: 6px;
+    text-align: center;
+    color: #eaf6ff;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: transform 0.18s, box-shadow 0.18s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pokeDiv:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 18px 44px rgba(2, 6, 23, 0.6);
+}
+
+/* image now fills the card area; use object-fit to cover the space */
+.pokeDiv img {
+    height: 600px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    image-rendering: pixelated;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 14px 30px rgba(2, 6, 23, 0.6));
+}
+
+.pokeDiv p {
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    font-size: 1.05rem;
+    color: #eaf6ff;
+}
+
+/* Arrow images inserted between cards */
+#EvolutionChain img {
+    /* larger arrow to match much bigger cards */
+    width: 80px;
+    height: 80px;
+    opacity: 0.95;
+    filter: drop-shadow(0 8px 28px rgba(2, 6, 23, 0.6));
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    input[type="text"] {
+        width: 100%;
+    }
+    #EvolutionChain {
+        padding: 8px;
+        gap: 12px;
+    }
+    .floating {
+        font-size: 1.6rem;
+    }
+
+    /* scale sprites down on small screens */
+    .pokeDiv {
+        width: 140px;
+    }
+    .pokeDiv img {
+        width: 100%;
+        height: 112px;
+        object-fit: cover;
+    }
+    #EvolutionChain img {
+        width: 48px;
+        height: 48px;
+    }
+}

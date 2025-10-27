@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Evolution Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Floating decorative blobs -->
+    <div class="float float-1"></div>
+    <div class="float float-2"></div>
+    <div class="float float-3"></div>
+
+    <div class="app">
+        <header class="hero">
+            <h1 class="floating">Pokémon Evolution Finder</h1>
+            <p class="tagline">Discover evolution chains with style</p>
+        </header>
+
+        <div class="controls">
+            <input type="text" id="pokemonName" placeholder="Enter Pokémon name or ID">
+            <button id="searchButton">Get Evolution</button>
+        </div>
+
+        <div id="result">
+            <h2>Evolution Chain</h2>
+            <div id="loader" style="display: none;">
+                <div class="spinner"></div>
+                <div class="loader-text">Loading...</div>
+            </div>
+            <div id="EvolutionChain">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
