@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="landing" class="landing-screen">
+    <h1 class="game-title">TIC TAC TOE</h1>
+    <div class="mode-boxes">
+      <div id="playerMode" class="mode-box">2 Player</div>
+      <div id="computerMode" class="mode-box">Vs Computer</div>
+    </div>
+  </div>
+  <div id="gameWindow" class="game-window hidden">
+    <h2 class="game-heading">Tic Tac Toe</h2>
+    <div class="board" id="board">
+      <div class="cell" data-index="0"></div>
+      <div class="cell" data-index="1"></div>
+      <div class="cell" data-index="2"></div>
+      <div class="cell" data-index="3"></div>
+      <div class="cell" data-index="4"></div>
+      <div class="cell" data-index="5"></div>
+      <div class="cell" data-index="6"></div>
+      <div class="cell" data-index="7"></div>
+      <div class="cell" data-index="8"></div>
+    </div>
+    <button id="changeModeBtn" class="btn">Change Mode</button>
+  </div>
+  <div id="resultModal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="resultMessage"></h3>
+      <button id="playAgainBtn" class="btn">Play Again</button>
+      <button id="closeModalBtn" class="btn">Close</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
