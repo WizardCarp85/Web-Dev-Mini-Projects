@@ -1,0 +1,141 @@
+/* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #232323;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Heading */
+h1 {
+  background-color: steelblue;
+  padding: 25px 15px;
+  width: 100%;
+  max-width: 700px;
+  border-radius: 10px;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: background-color 0.3s;
+}
+
+/* Controls */
+.controls {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  max-width: 700px;
+  width: 100%;
+}
+
+.controls button {
+  background-color: steelblue;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 6px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.controls button:hover {
+  background-color: #1e4f8b;
+  transform: scale(1.05);
+}
+
+#message {
+  font-size: 18px;
+  align-self: center;
+}
+
+/* Squares Container */
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 700px;
+  width: 100%;
+}
+
+/* Color Squares */
+.square {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.square:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .square {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .square {
+    width: 80px;
+    height: 80px;
+  }
+  h1 {
+    padding: 20px 10px;
+    font-size: 20px;
+  }
+  .controls button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+  #message {
+    font-size: 16px;
+  }
+}
+
+.mode-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mode-buttons button {
+  background-color: #555;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.mode-buttons button.selected {
+  background-color: steelblue;
+}
+
+.scoreboard {
+  margin-left: 20px;
+  font-size: 18px;
+}
